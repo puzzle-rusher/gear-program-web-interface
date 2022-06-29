@@ -1,8 +1,19 @@
 const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/functions.ts',
-  mode: 'production',
+  mode: 'development',
+  // mode: 'production',
+  plugins: [
+    new webpack.ProvidePlugin({
+        Buffer: ['buffer', 'Buffer'],
+    }),
+    new HtmlWebpackPlugin({
+      template: "./index.html",
+    })
+  ],
   module: {
     rules: [
       {
@@ -14,9 +25,17 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    fallback: {
+        buffer: require.resolve('buffer/'),
+    },
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    library: 'Contract',
   },
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, './contract_files'), 
+      publicPath: '/contract_files'
+    }
+  }
 };
