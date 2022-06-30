@@ -21,9 +21,7 @@
   },
   "dependencies": {
     "@gear-js/api": "^0.22.2",
-    "@polkadot/api": "8.9.1",
     "@polkadot/extension-dapp": "^0.44.1",
-    "@polkadot/extension-inject": "^0.34",
-    "gear-js": "^0.0.2"
+    "gear-program-interface-core": "^1.0.3"
   }
 }

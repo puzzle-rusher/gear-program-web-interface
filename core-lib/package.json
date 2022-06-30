@@ -1,0 +1,18 @@
+{
+  "name": "gear-program-interface-core",
+  "version": "1.0.",
+  "description": "",
+  "author": "puzzle-rusher",
+  "main": "build/gear-program-inteface-core.js",
+  "types": "build/gear-program-inteface-core.d.ts",
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "@gear-js/api": "^0.22.2",
+    "@polkadot/api": "^8.10.1",
+    "@polkadot/extension-dapp": "^0.44.1",
+    "@polkadot/extension-inject": "^0.44.1"
+  }
+}
