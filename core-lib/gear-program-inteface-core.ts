@@ -27,7 +27,7 @@ export const UploadProgram = async (
     account.decodedAddress,
     fileBuffer,
     initPayload,
-    0,
+    value,
     true,
     meta
   );
@@ -64,9 +64,9 @@ export const UploadProgram = async (
 export const Action = async (
   api: GearApi,
   account: Account,
-  meta: Metadata,
   messageModel: MessageModel,
-  callback: (ISubmittableResult) => void
+  callback: (ISubmittableResult) => void,
+  meta?: Metadata,
 ) => {
   const injector = await web3FromSource(account.meta.source);
   const { destination, payload, value } = messageModel;
@@ -95,10 +95,10 @@ export const Action = async (
 
 export const ProgramState = async (
   api: GearApi,
-  stateModel: ProgramStateModel,
+  programId: Hex,
+  payload: PayloadType,
+  meta?: Buffer,
 ) => {
-  const { programId, meta, payload } = stateModel;
-
   try {
     return await api.programState.read(programId, meta, payload)
   } catch (error) {
@@ -177,7 +177,7 @@ function readFileAsync(file: File) {
 export interface UploadProgramModel {
   id?: string;
   meta?: Metadata;
-  value: number;
+  value?: number;
   initPayload: PayloadType;
   payloadType?: string;
 }
@@ -186,10 +186,4 @@ export interface MessageModel {
   destination: Hex;
   payload: PayloadType;
   value?: number;
-}
-
-export interface ProgramStateModel {
-  programId: Hex;
-  meta?: Buffer;
-  payload?: PayloadType;
 }

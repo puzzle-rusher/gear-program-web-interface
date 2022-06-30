@@ -12,7 +12,7 @@ export const UploadProgram = (api, account, file, programModel, callback) => __a
     const injector = yield web3FromSource(account.meta.source);
     const fileBuffer = Buffer.from((yield readFileAsync(file)));
     const { value, initPayload, meta, payloadType } = programModel;
-    const gasLimit = yield api.program.calculateGas.init(account.decodedAddress, fileBuffer, initPayload, 0, true, meta);
+    const gasLimit = yield api.program.calculateGas.init(account.decodedAddress, fileBuffer, initPayload, value, true, meta);
     console.log("GAS SPENT", gasLimit.toHuman());
     const program = {
         code: fileBuffer,
@@ -39,7 +39,7 @@ export const UploadProgram = (api, account, file, programModel, callback) => __a
         console.log(error);
     }
 });
-export const Action = (api, account, meta, messageModel, callback) => __awaiter(void 0, void 0, void 0, function* () {
+export const Action = (api, account, messageModel, callback, meta) => __awaiter(void 0, void 0, void 0, function* () {
     const injector = yield web3FromSource(account.meta.source);
     const { destination, payload, value } = messageModel;
     const gasLimit = yield api.program.calculateGas.handle(account.decodedAddress, destination, payload, value, true, meta);
@@ -52,8 +52,7 @@ export const Action = (api, account, meta, messageModel, callback) => __awaiter(
         console.log(error);
     }
 });
-export const ProgramState = (api, stateModel) => __awaiter(void 0, void 0, void 0, function* () {
-    const { programId, meta, payload } = stateModel;
+export const ProgramState = (api, programId, payload, meta) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         return yield api.programState.read(programId, meta, payload);
     }

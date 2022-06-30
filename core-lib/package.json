@@ -1,6 +1,6 @@
 {
   "name": "gear-program-interface-core",
-  "version": "1.0.",
+  "version": "1.0.5",
   "description": "",
   "author": "puzzle-rusher",
   "main": "build/gear-program-inteface-core.js",
